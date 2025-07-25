@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Feliz Aniversario de 2 Meses!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(120deg, #8b8484, #b31616);
+      overflow-x: hidden;
+    }
+    h1, h2, h3 {
+      font-family: 'Pacifico', cursive;
+    }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .love-letter {
+      background-color: #fff;
+      color: #333;
+      font-size: 1.2em;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      white-space: pre-line;
+      overflow: hidden;
+      border-left: 5px solid #c41532;
+    }
+    .typewriter {
+      display: inline-block;
+      border-right: 2px solid black;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 6s steps(60, end), blink-caret 0.75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: black }
+    }
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .modal-content {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 600px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .close-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff4d6d;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      animation: heartbeat 1.5s infinite;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(0.95); }
+      75% { transform: scale(1.05); }
+    }
+    .game-board {
+      display: grid;
+      grid-template-columns: repeat(4, 80px);
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .card {
+      width: 80px;
+      height: 80px;
+      font-size: 2rem;
+      background-color: #fff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .card.revealed {
+      background-color: #ffe0e9;
+    }
+    .modal.hidden {
+      display: none;
+    }
+      @keyframes fade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #carouselText {
+      opacity: 0;
+      animation: fade 1s ease-in-out forwards;
+    }
+    audio {
+      display: none;
+    }
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #carouselText {
+      opacity: 0;
+      animation: fade 1s ease-in-out forwards;
+    }
+    audio {
+      display: none;
+    }
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(0); }
+  to { opacity: 1; transform: translateY(-40px); }
+}
+</style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <div class="modal" id="welcomeModal">
+    <div class="modal-content">
+      <h1>💖 ¡Hola mi amor! 💖</h1>
+      <p>Quiero que sepas lo mucho que te amo. Gracias por estos dos meses maravillosos a tu lado. Eres mi todo, mi alegría, mi mejor historia. ❤️</p>
+      <button class="close-btn" onclick="closeWelcomeModal()">Entrar a nuestra historia</button>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="winModal">
+    <div class="modal-content">
+      <h1>🎉 ¡Lo lograste! 🎉</h1>
+      <p>Mi amor, si lograste completar este juego, no hay nada que no puedas lograr. Eres maravillosa, fuerte y capaz de todo. Te amo con todo mi corazón 💖</p>
+      <button class="close-btn" onclick="document.getElementById('winModal').style.display='none'">Cerrar</button>
+    </div>
+  </div>
+
+  <section class="love-letter">
+    <h2>Carta de Amor 💌</h2>
+    <p class="typewriter">Amor mío,
+Gracias por estos dos meses tan hermosos a tu lado. Cada día contigo ha sido un regalo, una aventura maravillosa, un momento de paz y alegría.
+
+Eres mi luz, mi refugio y mi razón para sonreír.
+
+Prometo seguir cuidando de ti, amándote y compartiendo esta historia tan mágica que estamos construyendo juntos.
+
+Con todo mi amor,
+Tu persona ♥️</p>
+  </section>
+
+  <section>
+  <h2>🌟 Frases que muestran lo importante que eres para mí 🌟</h2>
+  <div id="carousel" style="max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 0 15px rgba(0,0,0,0.1); font-size: 1.2em; min-height: 100px;">
+    <p id="carouselText">Desde que llegaste a mi vida, todo tiene más color.</p>
+  </div>
+</section>
+
+<section>
+  <h2>🎮 Mini Juego del Amor</h2>
+    <p>Haz clic en las cartas para encontrar las parejas. ¡Diviértete!</p>
+    <div class="game-board" id="gameBoard"></div>
+  </section>
+
+  <script>
+    function closeWelcomeModal() {
+      document.getElementById('welcomeModal').style.display = 'none';
+    }
+
+    const emojis = ['🍎','🍐','📦','🍉','🍌','❤️'];
+    let cards = [...emojis, ...emojis].sort(() => 0.5 - Math.random());
+    let board = document.getElementById('gameBoard');
+    let revealed = [];
+    let matched = [];
+    let lockBoard = false;
+
+    function checkWin() {
+      if (matched.length === emojis.length * 2) {
+        document.getElementById('winModal').classList.remove('hidden');
+        document.getElementById('winModal').style.display = 'flex';
+      }
+    }
+
+    cards.forEach((emoji, index) => {
+      let card = document.createElement('div');
+      card.classList.add('card');
+      card.dataset.emoji = emoji;
+      card.dataset.index = index;
+      card.innerHTML = '';
+      board.appendChild(card);
+
+      card.addEventListener('click', () => {
+        if (lockBoard || card.classList.contains('revealed') || revealed.length === 2) return;
+
+        card.classList.add('revealed');
+        card.innerHTML = emoji;
+        revealed.push(card);
+
+        if (revealed.length === 2) {
+          lockBoard = true;
+          setTimeout(() => {
+            if (revealed[0].dataset.emoji === revealed[1].dataset.emoji) {
+              matched.push(revealed[0], revealed[1]);
+              revealed = [];
+              checkWin();
+            } else {
+              revealed.forEach(c => {
+                c.classList.remove('revealed');
+                c.innerHTML = '';
+              });
+              revealed = [];
+            }
+            lockBoard = false;
+          }, 1000);
+        }
+      });
+    });
+  </script>
+
+  <script>
+    const frases = [
+      "Desde que llegaste a mi vida, todo tiene más color.",
+      "Eres mi paz en el caos y mi sonrisa en los días nublados.",
+      "Tu amor me ha hecho una mejor persona cada día.",
+      "Nada se compara a la felicidad que siento contigo.",
+      "Eres mi mejor historia, mi mejor casualidad."
+    ];
+    let index = 0;
+    setInterval(() => {
+  index = (index + 1) % frases.length;
+  const textElement = document.getElementById('carouselText');
+  textElement.style.opacity = 0;
+  setTimeout(() => {
+    textElement.textContent = frases[index];
+    textElement.style.animation = 'none';
+    void textElement.offsetWidth;
+    textElement.style.animation = 'fade 1s ease-in-out forwards';
+    document.getElementById('chime').play();
+  }, 200);
+      document.getElementById('carouselText').textContent = frases[index];
+    }, 4000);
+  </script>
+  <audio id="chime" src="https://cdn.pixabay.com/audio/2022/03/15/audio_10bce0fe55.mp3"></audio>
+  <script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createParticle() {
+      const shape = Math.random() < 0.5 ? 'circle' : 'heart';
+      return {
+        x: Math.random() * canvas.width,
+        y: canvas.height + Math.random() * 100,
+        size: Math.random() * 5 + 1,
+        speedY: Math.random() * -1.5 - 1,
+        alpha: Math.random() * 0.5 + 0.5,
+        color: ['#fff', '#ff8fab', '#ffccd5', '#ffe5ec'][Math.floor(Math.random() * 4)], shape: shape
+      };
+    }
+
+    for (let i = 0; i < 80; i++) {
+      particles.push(createParticle());
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        if (p.shape === 'circle') {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      } else {
+        drawHeart(ctx, p.x, p.y, p.size);
+      }
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.alpha;
+        ctx.fill();
+        p.y += p.speedY;
+        if (p.y < -10) {
+          Object.assign(p, createParticle());
+        }
+      });
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(drawParticles);
+    }
+
+    function drawHeart(ctx, x, y, size) {
+      ctx.save();
+      ctx.beginPath();
+      const topCurveHeight = size * 0.3;
+      ctx.moveTo(x, y);
+      ctx.bezierCurveTo(x, y - topCurveHeight, x - size, y - topCurveHeight, x - size, y);
+      ctx.bezierCurveTo(x - size, y + size, x, y + size * 1.5, x, y + size * 2);
+      ctx.bezierCurveTo(x, y + size * 1.5, x + size, y + size, x + size, y);
+      ctx.bezierCurveTo(x + size, y - topCurveHeight, x, y - topCurveHeight, x, y);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    canvas.addEventListener('click', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const mensajes = [
+    'Eres maravillosa 💖',
+    'Lo mejor de mi vida 🌟',
+    'Mi futura esposa 💍',
+    'Mi musa 🎨',
+    'Mi inspiración ✨',
+    'Mi patrona 👑'
+  ];
+  particles.forEach(p => {
+    if (p.shape === 'heart') {
+      const dx = p.x - x;
+      const dy = p.y - y;
+      if (Math.sqrt(dx * dx + dy * dy) < p.size * 2) {
+        const colors = ['#ff4d6d', '#ff8fab', '#ffc0cb', '#ffb3c1'];
+        p.color = colors[Math.floor(Math.random() * colors.length)];
+        const msg = document.createElement('div');
+        msg.textContent = mensajes[Math.floor(Math.random() * mensajes.length)];
+        msg.style.position = 'absolute';
+        msg.style.left = `${x}px`;
+        msg.style.top = `${y}px`;
+        msg.style.color = '#fff';
+        msg.style.fontSize = '1.2em';
+        msg.style.fontWeight = 'bold';
+        msg.style.pointerEvents = 'none';
+        msg.style.animation = 'fadeUp 1.5s ease-out forwards';
+        document.body.appendChild(msg);
+        document.getElementById('heartSound').play();
+        setTimeout(() => msg.remove(), 1500);
+      }
+    }
+  });
+});
+
+    drawParticles();
+  </script>
+<audio id="heartSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_10bce0fe55.mp3"></audio>
+</body>
+</html>
+
