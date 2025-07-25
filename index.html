@@ -11,7 +11,7 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #fff0f5;
+      background: #be0a46a2;
       color: #333;
       position: relative;
       overflow-x: hidden;
@@ -23,14 +23,20 @@
       z-index: 2;
     }
     header {
-      background: linear-gradient(135deg, #ff85a2, #ffcccb);
-      color: white;
+      background: linear-gradient(135deg, #a81336, #8a1c1a);
+      color: rgb(255, 255, 255);
     }
     h1 {
       font-size: 2.5em;
       margin: 0;
     }
-
+    #romantic-body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ffe6f0, #fff);
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
     .carousel {
       position: relative;
       width: 100%;
@@ -59,7 +65,7 @@
       width: 100px;
       height: 100px;
       background-color: #fff;
-      border: 2px solid #ff99aa;
+      border: 2px solid #e21c3d;
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -127,7 +133,45 @@
       to { opacity: 1; transform: scale(1); }
       
     }
+    #carousel-container {
+      position: relative;
+      width: 70%;
+      height: 90%;
+      max-width: 800px;
+      margin: 20px auto;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 0, 100, 0.3);
+    }
 
+    #carousel-slides {
+      display: flex;
+      transition: transform 2s ease-in-out;
+    }
+
+    .carousel-slide {
+      position: relative;
+      min-width: 100%;
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .slide-text {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(161, 145, 145, 0.308);
+      padding: 12px 20px;
+      border-radius: 20px;
+      font-size: 1.4rem;
+      color: #c50c50;
+      font-weight: bold;
+      text-align: center;
+      max-width: 90%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
     .hearts {
       position: fixed;
       top: 0;
@@ -155,6 +199,69 @@
         transform: translateY(-10vh) scale(1.5);
         opacity: 0;
       }
+    }
+    #cosmic-love-section {
+      position: relative;
+      height: 550px;
+      overflow: hidden;
+      background: radial-gradient(ellipse at center, #14141679 0%, #16101063 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      color: white;
+      text-align: center;
+    }
+  
+    #cosmic-content {
+      position: relative;
+      z-index: 3;
+      max-width: 800px;
+      padding: 20px;
+      background: rgba(63, 61, 61, 0.4);
+      border: 1px solid #fff2;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #ffffff20;
+    }
+  
+    #cosmic-content h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #615861;
+      text-shadow: 0 0 10px #fff;
+    }
+  
+    #cosmic-content p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #e0d4ff;
+    }
+  
+    /* Estrellas parpadeantes */
+    #cosmic-stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: 1;
+      pointer-events: none;
+    }
+  
+    #cosmic-stars::before {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      box-shadow:
+        50px 100px white, 120px 150px white, 200px 50px white,
+        300px 200px white, 400px 100px white, 500px 250px white,
+        600px 180px white, 700px 300px white, 800px 150px white,
+        900px 220px white, 1000px 100px white;
+      animation: sparkle 2s infinite alternate;
+      opacity: 0.6;
     }
   </style>
 </head>
@@ -187,29 +294,105 @@
   <!-- Bienvenida -->
   <header>
     <h1 style="color: gray;">💖 ¡Feliz Aniversario de 2 Meses! 💖</h1>
-    <p>Gracias por estos dos meses llenos de amor, risas y momentos únicos juntos.</p>
+    <p>Gracias por estos dos meses llenos de amor, momentos hermoso, momentos unicos junto a ti, 
+        gracias por formar parte de mi vida y de darme la felicidad y tranquilidad que necesitaba,
+        gracias por luchar junto a mi para seguir adelante con este gigantesto amor que sentimos,
+        gracias por darlo todo por este hombre 🥰</p>
   </header>
 
   <!-- Carrusel -->
-  <section class="section">
-    <h2>Frases Románticas 💌</h2>
-    <div class="carousel">
-      <p id="phrase">Eres mi lugar favorito en el mundo.</p>
+
+
+  <body id="romantic-body">
+
+    <!-- Corazones decorativos -->
+    <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="heart" style="left: 30%; animation-delay: 1s;"></div>
+    <div class="heart" style="left: 50%; animation-delay: 2s;"></div>
+    <div class="heart" style="left: 70%; animation-delay: 3s;"></div>
+    <div class="heart" style="left: 90%; animation-delay: 4s;"></div>
+  
+    <!-- Carrusel de imágenes -->
+    <div id="carousel-container">
+      <div id="carousel-slides">
+        <div class="carousel-slide" style="background-image: url('img/cumple1.jpg');">
+          <div class="slide-text">Tu sonrisa es mi lugar favorito en el mundo.</div>
+        </div>
+        <div class="carousel-slide" style="background-image: url('img/cumple2.jpeg');">
+          <div class="slide-text">Desde que llegaste, mi mundo es más bonito.</div>
+        </div>
+        <div class="carousel-slide" style="background-image: url('img/fiesta1.jpg');">
+          <div class="slide-text">Cada momento contigo es un regalo que atesoro.</div>
+        </div>
+      </div>
+  
+      <!-- Botones -->
+      <div id="carousel-buttons">
+        <button class="carousel-button" id="prev">&#10094;</button>
+        <button class="carousel-button" id="next">&#10095;</button>
+      </div>
+    </div>
+
+    <!-- Sección de amor cósmico con estrellas y cometas -->
+<section id="cosmic-love-section">
+    <div id="cosmic-stars"></div>
+    <div id="cosmic-comets">
+      <div class="comet" style="top: 20%; left: -10%; animation-delay: 1s;"></div>
+      <div class="comet" style="top: 60%; left: -20%; animation-delay: 4s;"></div>
+      <div class="comet" style="top: 35%; left: -15%; animation-delay: 7s;"></div>
+    </div>
+    <div id="cosmic-content">
+      <h2>🌌 Eres mi universo</h2>
+      <p>
+        En la inmensidad del cosmos, entre estrellas y constelaciones,<br />
+        tú eres la luz que guía mi galaxia, el centro de mi cielo infinito.<br />
+        No hay estrella más brillante que tu sonrisa, ni planeta más hermoso que tu corazón.<br />
+        Te amo más allá de las estrellas, hasta el último rincón del tiempo. 💫
+      </p>
     </div>
   </section>
+  
+  
+    <script>
+      const slides = document.getElementById("carousel-slides");
+      const totalSlides = slides.children.length;
+      let index = 0;
+  
+      function updateSlide() {
+        slides.style.transform = `translateX(-${index * 100}%)`;
+      }
+  
+      // Botones manuales
+      document.getElementById("next").addEventListener("click", () => {
+        index = (index + 1) % totalSlides;
+        updateSlide();
+      });
+  
+      document.getElementById("prev").addEventListener("click", () => {
+        index = (index - 1 + totalSlides) % totalSlides;
+        updateSlide();
+      });
+  
+      // Cambio automático
+      setInterval(() => {
+        index = (index + 1) % totalSlides;
+        updateSlide();
+      }, 4000);
+    </script>
+  </body>
 
   <!-- Juego de Memoria -->
   <section class="section">
-    <h2>Juego: Encuentra las Parejas 🍉🍌🍈</h2>
+    <h2>Juego: Encuentra las Parejas 🍉🍌🍈📦y Gana un regalo especial !! 😏🔥</h2>
     <div class="game" id="game"></div>
   </section>
 
   <!-- Modal de Juego Completado -->
   <div class="modal" id="modal">
     <div class="modal-content">
-      <h2>¡Felicidades! 🎉</h2>
-      <p>Has completado el juego. Ahora puedes desbloquear algo especial... 💖</p>
-      <button onclick="showPassword()">Desbloquear Contenido</button>
+      <h2>¡Felicidades mi corazón de melon ! 🎉</h2>
+      <p>Has completado el juego. Ahora puedes desbloquear algo especial ... 💖</p>
+      <button class="close-btn" onclick="showPassword()">Desbloquear Contenido</button>
     </div>
   </div>
 
@@ -218,17 +401,20 @@
     <div class="password-content">
       <h3>Introduce la fecha que bebé se declaro por primera vez:</h3>
       <input type="text" id="password" placeholder="DD/MM/AAAA">
+      
       <br>
-      <button onclick="checkPassword()">Aceptar</button>
+      <button class="close-btn" onclick="checkPassword()">Aceptar</button>
     </div>
   </div>
 
   <!-- Contenido Especial -->
   <div class="hidden-content" id="hiddenContent">
     <h2>💌 Carta para Ti</h2>
-    <p>Desde que llegaste a mi vida, todo es más bonito. Gracias por ser mi compañera, por tu sonrisa, por cada palabra y por llenar mis días de amor. ¡Te amo! ❤️</p>
-    <iframe src="https://drive.google.com/file/d/14BtajTy68qmoMM6AI1mRrBW9UoR7Y_Kr/view?usp=sharing" width="600" height="400" allow="autoplay"></iframe>
-
+    <p>Disfruta este pequeño video mi amor ❤️ bebé lo hizo sitiendose seguro de si mismo, gracias a ti mi bonita 😏🔥😍</p>
+    <a href="https://drive.google.com/file/d/14BtajTy68qmoMM6AI1mRrBW9UoR7Y_Kr/view?usp=sharing" target="_blank">
+        <button class="close-btn">Ver tú video Especial de lo que es tuyo Mi Amor 💖</button>
+      </a>
+      
 </div>
 
   <script>
@@ -309,6 +495,7 @@
       if (password === correct) {
         document.getElementById("passwordSection").style.display = "none";
         document.getElementById("hiddenContent").style.display = "block";
+        reproducirVideo();
       } else {
         alert("Fecha incorrecta. Inténtalo de nuevo 🕰️");
       }
@@ -317,7 +504,10 @@
     function closeWelcome() {
       document.getElementById("welcomeModal").style.display = "none";
     }
-
+    function reproducirVideo() {
+    var videoContainer = document.getElementById('videoContainer');
+    videoContainer.innerHTML = '<iframe src="https://drive.google.com/file/d/14BtajTy68qmoMM6AI1mRrBW9UoR7Y_Kr/view?usp=sharing" width="640" height="360" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+  }
     function createHearts() {
       const container = document.getElementById("heartsContainer");
       const numHearts = 30;
@@ -335,8 +525,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
